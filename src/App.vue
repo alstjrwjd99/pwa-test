@@ -20,7 +20,10 @@ const photo = ref(null);
 
 onMounted(async () => {
 	try {
-		const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+		const stream = await navigator.mediaDevices.getUserMedia({
+			video: { facingMode: { exact: "environment" } }, // 📸 후면 카메라
+			audio: false,
+		});
 		video.value.srcObject = stream;
 	} catch (e) {
 		alert("카메라 접근 실패 😢");
